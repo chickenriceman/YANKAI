@@ -1,3 +1,5 @@
+'use client';
+
 interface FiltersProps {
     country: string;
     type: string;
@@ -16,55 +18,87 @@ export default function Filters({
     onSortChange,
 }: FiltersProps) {
     return (
-        <div
-            className="card p-4 mb-8 flex flex-wrap gap-4 items-center"
-            style={{ boxShadow: 'none', border: '1px solid var(--border)' }}
-        >
+        <div className="sidebar">
+            {/* Card Type Filter */}
+            <div className="filter-section">
+                <h3 className="filter-title">Card Type</h3>
+                <div className="filter-options">
+                    <label className="filter-option">
+                        <input
+                            type="radio"
+                            name="type"
+                            checked={type === 'all'}
+                            onChange={() => onTypeChange('all')}
+                        />
+                        <span>All Cards</span>
+                    </label>
+                    <label className="filter-option">
+                        <input
+                            type="radio"
+                            name="type"
+                            checked={type === 'cashback'}
+                            onChange={() => onTypeChange('cashback')}
+                        />
+                        <span>💰 Cashback</span>
+                    </label>
+                    <label className="filter-option">
+                        <input
+                            type="radio"
+                            name="type"
+                            checked={type === 'miles'}
+                            onChange={() => onTypeChange('miles')}
+                        />
+                        <span>✈️ Travel Miles</span>
+                    </label>
+                </div>
+            </div>
+
             {/* Country Filter */}
-            <div className="flex items-center gap-3">
-                <label className="text-sm font-medium" style={{ color: 'var(--foreground-muted)' }}>
-                    Country
-                </label>
-                <select
-                    value={country}
-                    onChange={(e) => onCountryChange(e.target.value)}
-                    className="select"
-                >
-                    <option value="all">🌏 All Countries</option>
-                    <option value="MY">🇲🇾 Malaysia</option>
-                    <option value="SG">🇸🇬 Singapore</option>
-                </select>
+            <div className="filter-section">
+                <h3 className="filter-title">Country</h3>
+                <div className="filter-options">
+                    <label className="filter-option">
+                        <input
+                            type="radio"
+                            name="country"
+                            checked={country === 'all'}
+                            onChange={() => onCountryChange('all')}
+                        />
+                        <span>All Countries</span>
+                    </label>
+                    <label className="filter-option">
+                        <input
+                            type="radio"
+                            name="country"
+                            checked={country === 'MY'}
+                            onChange={() => onCountryChange('MY')}
+                        />
+                        <span>🇲🇾 Malaysia</span>
+                    </label>
+                    <label className="filter-option">
+                        <input
+                            type="radio"
+                            name="country"
+                            checked={country === 'SG'}
+                            onChange={() => onCountryChange('SG')}
+                        />
+                        <span>🇸🇬 Singapore</span>
+                    </label>
+                </div>
             </div>
 
-            {/* Type Filter */}
-            <div className="flex items-center gap-3">
-                <label className="text-sm font-medium" style={{ color: 'var(--foreground-muted)' }}>
-                    Type
-                </label>
+            {/* Sort By */}
+            <div className="filter-section">
+                <h3 className="filter-title">Sort By</h3>
                 <select
-                    value={type}
-                    onChange={(e) => onTypeChange(e.target.value)}
                     className="select"
-                >
-                    <option value="all">All Types</option>
-                    <option value="cashback">💰 Cashback</option>
-                    <option value="miles">✈️ Miles</option>
-                </select>
-            </div>
-
-            {/* Sort */}
-            <div className="flex items-center gap-3 ml-auto">
-                <label className="text-sm font-medium" style={{ color: 'var(--foreground-muted)' }}>
-                    Sort by
-                </label>
-                <select
+                    style={{ width: '100%' }}
                     value={sortBy}
                     onChange={(e) => onSortChange(e.target.value)}
-                    className="select"
                 >
                     <option value="featured">Featured</option>
                     <option value="rating">Highest Rated</option>
-                    <option value="name">Name A-Z</option>
+                    <option value="name">Name (A-Z)</option>
                 </select>
             </div>
         </div>

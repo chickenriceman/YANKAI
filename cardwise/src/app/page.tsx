@@ -1,174 +1,191 @@
 import Link from 'next/link';
-import { CardGrid } from '@/components';
+import Image from 'next/image';
+import { CardItem, StarRating } from '@/components';
 import cardsData from '@/data/cards.json';
 import { CreditCard } from '@/types';
 
 const cards = cardsData as CreditCard[];
-const featuredCards = cards.filter(card => card.featured).slice(0, 6);
+const featuredCards = cards.filter(card => card.featured).slice(0, 4);
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section */}
-      <section className="gradient-hero section-lg relative">
-        <div className="container relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="animate-fade-in-up">
-              <span className="badge inline-flex mb-6" style={{ background: 'rgba(99, 102, 241, 0.2)', color: '#A78BFA' }}>
-                🇲🇾 Malaysia & 🇸🇬 Singapore
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Find Your Perfect
-                <span
-                  className="block mt-2"
-                  style={{
-                    background: 'linear-gradient(135deg, #818CF8 0%, #A78BFA 50%, #C4B5FD 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}
-                >
-                  Credit Card
-                </span>
-              </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-xl mx-auto mb-10">
-                Compare cashback, miles, and rewards cards from top banks.
-                Make smarter financial decisions with CardWise.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/cards" className="btn btn-primary btn-lg">
-                  Browse All Cards
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
-                <Link
-                  href="/compare"
-                  className="btn btn-lg"
-                  style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    color: 'white',
-                    border: '1px solid rgba(255,255,255,0.2)'
-                  }}
-                >
-                  Compare Cards
-                </Link>
+      {/* Hero Section - Clean White Style */}
+      <section className="hero">
+        <div className="container">
+          <h1>Find the Best Credit Card for You</h1>
+          <p>
+            Compare credit cards from Malaysia & Singapore. Find the perfect card for cashback,
+            travel miles, or everyday rewards.
+          </p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/cards" className="btn btn-primary btn-lg">
+              Compare Credit Cards →
+            </Link>
+            <Link href="/cards?type=cashback" className="btn btn-secondary btn-lg">
+              Best Cashback Cards
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Category Cards */}
+      <section className="section" style={{ paddingTop: '48px', paddingBottom: '48px' }}>
+        <div className="container">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '16px'
+          }}>
+            <Link
+              href="/cards?type=cashback"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '20px 24px',
+                background: 'white',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-lg)',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              className="card-row"
+            >
+              <span style={{ fontSize: '2rem' }}>💰</span>
+              <div>
+                <h3 style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  color: 'var(--text-dark)',
+                  marginBottom: '4px'
+                }}>
+                  Best Cashback Cards
+                </h3>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
+                  Get money back on purchases
+                </p>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Cards Visual */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 hidden lg:flex gap-4 animate-float">
-          <div
-            className="w-64 h-40 rounded-xl shadow-2xl"
-            style={{
-              background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
-              transform: 'rotate(-6deg)',
-              opacity: 0.9
-            }}
-          />
-          <div
-            className="w-64 h-40 rounded-xl shadow-2xl"
-            style={{
-              background: 'linear-gradient(135deg, #0F172A 0%, #334155 100%)',
-              transform: 'rotate(3deg)',
-              opacity: 0.95
-            }}
-          />
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="section-sm relative" style={{ marginTop: '80px' }}>
-        <div className="container">
-          <div
-            className="card p-2 grid grid-cols-2 md:grid-cols-4"
-            style={{ background: 'white' }}
-          >
-            <div className="stat-card border-r" style={{ borderColor: 'var(--border)' }}>
-              <div className="stat-value">50+</div>
-              <div className="stat-label">Credit Cards</div>
-            </div>
-            <div className="stat-card md:border-r" style={{ borderColor: 'var(--border)' }}>
-              <div className="stat-value">12</div>
-              <div className="stat-label">Partner Banks</div>
-            </div>
-            <div className="stat-card border-r border-t md:border-t-0" style={{ borderColor: 'var(--border)' }}>
-              <div className="stat-value">2</div>
-              <div className="stat-label">Countries</div>
-            </div>
-            <div className="stat-card border-t md:border-t-0" style={{ borderColor: 'var(--border)' }}>
-              <div className="stat-value">Free</div>
-              <div className="stat-label">Always</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Card Types */}
-      <section className="section">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Choose Your Card Type</h2>
-            <p style={{ color: 'var(--foreground-muted)' }}>
-              Different cards for different lifestyles. Find the one that rewards you best.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Link href="/cards?type=cashback" className="feature-card group">
-              <div className="feature-icon">💰</div>
-              <h3 className="text-xl font-bold mb-2">Cashback Cards</h3>
-              <p className="mb-4" style={{ color: 'var(--foreground-muted)' }}>
-                Get money back on every purchase. Perfect for everyday spending on groceries, dining, and petrol.
-              </p>
-              <span className="font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: 'var(--accent)' }}>
-                View Cashback Cards
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </span>
             </Link>
 
-            <Link href="/cards?type=miles" className="feature-card group">
-              <div className="feature-icon">✈️</div>
-              <h3 className="text-xl font-bold mb-2">Miles Cards</h3>
-              <p className="mb-4" style={{ color: 'var(--foreground-muted)' }}>
-                Earn air miles with every swipe. Ideal for frequent travelers and luxury getaways.
-              </p>
-              <span className="font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all" style={{ color: 'var(--accent)' }}>
-                View Miles Cards
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </span>
+            <Link
+              href="/cards?type=miles"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '20px 24px',
+                background: 'white',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-lg)',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              className="card-row"
+            >
+              <span style={{ fontSize: '2rem' }}>✈️</span>
+              <div>
+                <h3 style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  color: 'var(--text-dark)',
+                  marginBottom: '4px'
+                }}>
+                  Best Travel Cards
+                </h3>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
+                  Earn miles on every swipe
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/cards?country=MY"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '20px 24px',
+                background: 'white',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-lg)',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              className="card-row"
+            >
+              <span style={{ fontSize: '2rem' }}>🇲🇾</span>
+              <div>
+                <h3 style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  color: 'var(--text-dark)',
+                  marginBottom: '4px'
+                }}>
+                  Malaysia Cards
+                </h3>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
+                  Cards for Malaysian residents
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/cards?country=SG"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '20px 24px',
+                background: 'white',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-lg)',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              className="card-row"
+            >
+              <span style={{ fontSize: '2rem' }}>🇸🇬</span>
+              <div>
+                <h3 style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  color: 'var(--text-dark)',
+                  marginBottom: '4px'
+                }}>
+                  Singapore Cards
+                </h3>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
+                  Cards for Singapore residents
+                </p>
+              </div>
             </Link>
           </div>
         </div>
       </section>
 
       {/* Featured Cards */}
-      <section className="section gradient-subtle">
+      <section className="section bg-soft" style={{ paddingTop: '48px', paddingBottom: '64px' }}>
         <div className="container">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
-            <div>
-              <span className="badge badge-accent mb-3">Top Picks</span>
-              <h2 className="text-3xl md:text-4xl font-bold">Featured Cards</h2>
-            </div>
-            <Link href="/cards" className="btn btn-secondary hidden md:inline-flex">
-              View All Cards
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '24px'
+          }}>
+            <h2 className="section-title" style={{ margin: 0, textAlign: 'left' }}>
+              Featured Credit Cards
+            </h2>
+            <Link href="/cards" className="btn btn-secondary">
+              View All →
             </Link>
           </div>
 
-          <CardGrid cards={featuredCards} />
-
-          <div className="text-center mt-10 md:hidden">
-            <Link href="/cards" className="btn btn-primary">
-              View All Cards
-            </Link>
+          {/* Card List */}
+          <div>
+            {featuredCards.map((card) => (
+              <CardItem key={card.id} card={card} />
+            ))}
           </div>
         </div>
       </section>
@@ -176,70 +193,116 @@ export default function Home() {
       {/* How It Works */}
       <section className="section">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How CardWise Works</h2>
-            <p style={{ color: 'var(--foreground-muted)' }}>
-              Finding the right card in 3 simple steps
-            </p>
-          </div>
+          <h2 className="section-title">How to Compare Credit Cards</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { num: '01', title: 'Browse', desc: 'Explore our curated collection of credit cards from top banks in Malaysia and Singapore.' },
-              { num: '02', title: 'Compare', desc: 'Use our comparison tool to see cards side-by-side and find the best match for your needs.' },
-              { num: '03', title: 'Apply', desc: 'Click through to the bank\'s website and apply directly. Some cards have exclusive bonuses!' }
-            ].map((step, idx) => (
-              <div key={idx} className="text-center">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
-                  style={{ background: 'var(--accent-gradient)' }}
-                >
-                  <span className="text-white font-bold text-xl">{step.num}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p style={{ color: 'var(--foreground-muted)' }}>{step.desc}</p>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '32px',
+            maxWidth: '900px',
+            margin: '0 auto'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: 'var(--primary-light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: 'var(--primary)'
+              }}>
+                1
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section">
-        <div className="container">
-          <div
-            className="rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
-            style={{ background: 'var(--accent-gradient)' }}
-          >
-            {/* Decorative Elements */}
-            <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-20"
-              style={{ background: 'radial-gradient(circle, white 0%, transparent 70%)', transform: 'translate(-30%, -30%)' }}
-            />
-            <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10"
-              style={{ background: 'radial-gradient(circle, white 0%, transparent 70%)', transform: 'translate(30%, 30%)' }}
-            />
-
-            <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Ready to Find Your Perfect Card?
-              </h2>
-              <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto">
-                Join thousands of smart shoppers who use CardWise to maximize their rewards.
+              <h3 style={{ marginBottom: '8px', fontSize: '18px' }}>Browse Cards</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
+                Explore credit cards from top banks in Malaysia and Singapore
               </p>
-              <Link
-                href="/cards"
-                className="btn btn-lg inline-flex"
-                style={{ background: 'white', color: 'var(--accent)' }}
-              >
-                Get Started — It&apos;s Free
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </Link>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: 'var(--primary-light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: 'var(--primary)'
+              }}>
+                2
+              </div>
+              <h3 style={{ marginBottom: '8px', fontSize: '18px' }}>Compare Features</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
+                See cards side-by-side to compare rewards, fees, and benefits
+              </p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: 'var(--primary-light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: 'var(--primary)'
+              }}>
+                3
+              </div>
+              <h3 style={{ marginBottom: '8px', fontSize: '18px' }}>Apply Online</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
+                Apply directly on the bank&apos;s website with our easy links
+              </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-inner">
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '16px'
+          }}>
+            <div>
+              <h3 style={{ color: 'white', marginBottom: '8px' }}>CardWise</h3>
+              <p style={{ color: 'var(--text-light)', fontSize: '14px', margin: 0 }}>
+                Compare credit cards in Malaysia & Singapore
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '24px' }}>
+              <Link href="/cards">Credit Cards</Link>
+              <Link href="/compare">Compare</Link>
+            </div>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            marginTop: '24px',
+            paddingTop: '24px',
+            fontSize: '13px',
+            color: 'var(--text-light)'
+          }}>
+            © 2026 CardWise. All rights reserved. Information is for reference only.
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

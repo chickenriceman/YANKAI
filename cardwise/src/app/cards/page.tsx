@@ -65,36 +65,45 @@ function CardsContent() {
     };
 
     return (
-        <div className="container py-8">
+        <div className="container">
             {/* Page Header */}
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold mb-2">
-                    {type === 'cashback' && '💰 Cashback Cards'}
-                    {type === 'miles' && '✈️ Miles Cards'}
-                    {type === 'all' && 'All Credit Cards'}
+            <div className="page-header">
+                <h1 className="page-title">
+                    {type === 'cashback' && '💰 Best Cashback Credit Cards'}
+                    {type === 'miles' && '✈️ Best Travel Miles Cards'}
+                    {type === 'all' && 'Compare Credit Cards'}
                 </h1>
-                <p style={{ color: 'var(--foreground-muted)' }}>
-                    {filteredCards.length} cards available
-                    {country !== 'all' && ` in ${country === 'MY' ? 'Malaysia' : 'Singapore'}`}
+                <p className="page-subtitle">
+                    Find the best credit cards in Malaysia & Singapore. Compare rewards, fees, and benefits side-by-side.
                 </p>
             </div>
 
-            {/* Filters */}
-            <Filters
-                country={country}
-                type={type}
-                sortBy={sortBy}
-                onCountryChange={setCountry}
-                onTypeChange={setType}
-                onSortChange={setSortBy}
-            />
+            {/* Page Layout: Sidebar + Main Content */}
+            <div className="page-layout">
+                {/* Sidebar Filters */}
+                <Filters
+                    country={country}
+                    type={type}
+                    sortBy={sortBy}
+                    onCountryChange={setCountry}
+                    onTypeChange={setType}
+                    onSortChange={setSortBy}
+                />
 
-            {/* Card Grid */}
-            <CardGrid
-                cards={filteredCards}
-                onCompare={handleCompare}
-                compareList={compareList.map(c => c.id)}
-            />
+                {/* Main Content */}
+                <div className="main-content">
+                    <p className="results-count">
+                        Showing {filteredCards.length} credit cards
+                        {country !== 'all' && ` in ${country === 'MY' ? 'Malaysia' : 'Singapore'}`}
+                    </p>
+
+                    <CardGrid
+                        cards={filteredCards}
+                        onCompare={handleCompare}
+                        compareList={compareList.map(c => c.id)}
+                    />
+                </div>
+            </div>
 
             {/* Compare Bar */}
             <CompareBar
@@ -104,7 +113,7 @@ function CardsContent() {
             />
 
             {/* Bottom padding for compare bar */}
-            {compareList.length > 0 && <div className="h-24" />}
+            {compareList.length > 0 && <div style={{ height: '100px' }} />}
         </div>
     );
 }
@@ -112,13 +121,18 @@ function CardsContent() {
 export default function CardsPage() {
     return (
         <Suspense fallback={
-            <div className="container py-8">
-                <div className="animate-pulse">
-                    <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/4 mb-8"></div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[1, 2, 3, 4, 5, 6].map(i => (
-                            <div key={i} className="h-80 bg-gray-200 rounded-xl"></div>
+            <div className="container">
+                <div className="page-header">
+                    <div style={{ height: '32px', background: '#eee', borderRadius: '8px', width: '300px', marginBottom: '8px' }} />
+                    <div style={{ height: '20px', background: '#eee', borderRadius: '8px', width: '500px' }} />
+                </div>
+                <div className="page-layout">
+                    <div className="sidebar">
+                        <div className="filter-section" style={{ height: '200px' }} />
+                    </div>
+                    <div className="main-content">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="card-row" style={{ height: '180px', background: '#f7f7f7', marginBottom: '16px' }} />
                         ))}
                     </div>
                 </div>
