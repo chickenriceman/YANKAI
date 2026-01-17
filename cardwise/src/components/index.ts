@@ -10,3 +10,4 @@ export { default as FeaturedPromotions } from './FeaturedPromotions';
 export { default as Testimonials } from './Testimonials';
 export { default as BlogPreview } from './BlogPreview';
 export { default as Footer } from './Footer';
+export { default as CardDatabase } from './CardDatabase';

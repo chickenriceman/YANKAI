@@ -29,9 +29,21 @@
         "maxRate": 8,
         "baseRate": 0.2,
         "categories": [
-          { "name": "Dining", "rate": 5, "cap": 30 },
-          { "name": "Shopping", "rate": 5, "cap": 30 },
-          { "name": "Entertainment", "rate": 5, "cap": 30 }
+          {
+            "name": "Dining",
+            "rate": 5,
+            "cap": 30
+          },
+          {
+            "name": "Shopping",
+            "rate": 5,
+            "cap": 30
+          },
+          {
+            "name": "Entertainment",
+            "rate": 5,
+            "cap": 30
+          }
         ]
       },
       "features": [
@@ -55,10 +67,48 @@
       "Guaranteed RM200 TNG Credit Gift",
       "First year fee waived"
     ],
-    "pros": ["High cashback rates", "Great sign-up gift", "Dining discounts"],
-    "cons": ["Annual fee applies after 1st year", "Spend requirement for waiver"],
+    "pros": [
+      "High cashback rates",
+      "Great sign-up gift",
+      "Dining discounts"
+    ],
+    "cons": [
+      "Annual fee applies after 1st year",
+      "Spend requirement for waiver"
+    ],
     "rating": 4.8,
     "applyUrl": "https://hsbc.com.my",
+    "featured": true
+  },
+  {
+    "id": "cimb-travel-world-elite",
+    "name": "CIMB Travel World Elite",
+    "bank": "CIMB",
+    "country": "MY",
+    "type": "miles",
+    "image": "/cards/cimb-travel-world-elite.png",
+    "annualFee": "RM 1,215.09 (waived with RM 240k spend)",
+    "minIncome": "RM 250,000",
+    "signupBonus": "Complimentary 4D3N stay at Anantara",
+    "cashbackRate": null,
+    "milesRate": "1 Mile / RM 1.00",
+    "highlights": [
+      "10x Bonus Points on overseas & airline spend",
+      "12x Lounge Access per year (Global)",
+      "Complimentary Marriott Club membership",
+      "No Foreign Transaction Fees"
+    ],
+    "pros": [
+      "Excellent overseas earn rate",
+      "Comprehensive travel insurance",
+      "Great airport lounge perks"
+    ],
+    "cons": [
+      "High income requirement",
+      "High annual fee"
+    ],
+    "rating": 4.8,
+    "applyUrl": "https://www.cimb.com.my/en/personal/day-to-day-banking/cards/credit-card/cimb-travel-world-elite-credit-card.html",
     "featured": true
   },
   {
@@ -91,7 +141,11 @@
         "maxRate": 5,
         "baseRate": 0.1,
         "categories": [
-           { "name": "Weekends", "rate": 5, "cap": 50 }
+          {
+            "name": "Weekends",
+            "rate": 5,
+            "cap": 50
+          }
         ]
       },
       "travel": {
@@ -105,8 +159,15 @@
       "Complimentary travel insurance",
       "0% installment plans"
     ],
-    "pros": ["High weekend cashback", "Great travel perks", "Metal card design"],
-    "cons": ["High income requirement", "Annual fee applies"],
+    "pros": [
+      "High weekend cashback",
+      "Great travel perks",
+      "Metal card design"
+    ],
+    "cons": [
+      "High income requirement",
+      "Annual fee applies"
+    ],
     "rating": 4.5,
     "applyUrl": "https://maybank.com.my",
     "featured": true
@@ -126,31 +187,33 @@
       "waiverConditions": "Waived for CIMB Preferred members"
     },
     "requirements": {
-       "minIncome": {
-         "amount": 150000,
-         "currency": "RM",
-         "period": "annum"
-       },
-       "age": {
-         "principal": 21,
-         "supplementary": 18
-       }
+      "minIncome": {
+        "amount": 150000,
+        "currency": "RM",
+        "period": "annum"
+      },
+      "age": {
+        "principal": 21,
+        "supplementary": 18
+      }
     },
     "benefits": {
-       "miles": {
-         "earnRate": "1.5 miles per RM 1"
-       },
-       "travel": {
-         "loungeAccess": "Unlimited Priority Pass lounge access",
-         "insurance": "Travel insurance coverage"
-       }
+      "miles": {
+        "earnRate": "1.5 miles per RM 1"
+      },
+      "travel": {
+        "loungeAccess": "Unlimited Priority Pass lounge access",
+        "insurance": "Travel insurance coverage"
+      }
     },
     "promotion": {
-       "title": "Welcome Bonus",
-       "startDate": "2026-01-01",
-       "endDate": "2026-12-31",
-       "gift": "50,000 bonus points",
-       "conditions": ["Spend RM10k in first 60 days"]
+      "title": "Welcome Bonus",
+      "startDate": "2026-01-01",
+      "endDate": "2026-12-31",
+      "gift": "50,000 bonus points",
+      "conditions": [
+        "Spend RM10k in first 60 days"
+      ]
     },
     "highlights": [
       "Priority Pass lounge access",
@@ -158,13 +221,20 @@
       "Golf privileges",
       "Luxury hotel benefits"
     ],
-    "pros": ["Excellent miles earning", "Premium travel benefits", "Concierge service"],
-    "cons": ["Very high income requirement", "Points expire in 3 years"],
+    "pros": [
+      "Excellent miles earning",
+      "Premium travel benefits",
+      "Concierge service"
+    ],
+    "cons": [
+      "Very high income requirement",
+      "Points expire in 3 years"
+    ],
     "rating": 4.3,
     "applyUrl": "https://cimb.com.my",
     "featured": true
   },
-   {
+  {
     "id": "public-bank-quantum",
     "name": "Public Bank Quantum Visa",
     "bank": "Public Bank",
@@ -172,11 +242,11 @@
     "type": "cashback",
     "image": "/cards/pb-quantum.png",
     "fees": {
-       "currency": "RM",
-       "principal": 180,
-       "supplementary": 90,
-       "waivedFirstYear": true,
-       "waiverConditions": "Waived with 12 transactions/year"
+      "currency": "RM",
+      "principal": 180,
+      "supplementary": 90,
+      "waivedFirstYear": true,
+      "waiverConditions": "Waived with 12 transactions/year"
     },
     "requirements": {
       "minIncome": {
@@ -193,8 +263,16 @@
       "cashback": {
         "maxRate": 5,
         "categories": [
-           { "name": "Contactless Transactions", "rate": 5, "cap": 30 },
-           { "name": "Online Spending", "rate": 5, "cap": 30 }
+          {
+            "name": "Contactless Transactions",
+            "rate": 5,
+            "cap": 30
+          },
+          {
+            "name": "Online Spending",
+            "rate": 5,
+            "cap": 30
+          }
         ]
       }
     },
@@ -204,8 +282,15 @@
       "Low income requirement",
       "Mobile payment support"
     ],
-    "pros": ["Great for beginners", "Easy fee waiver", "Good cashback rates"],
-    "cons": ["Cashback capped monthly", "Limited premium perks"],
+    "pros": [
+      "Great for beginners",
+      "Easy fee waiver",
+      "Good cashback rates"
+    ],
+    "cons": [
+      "Cashback capped monthly",
+      "Limited premium perks"
+    ],
     "rating": 4.2,
     "applyUrl": "https://publicbank.com.my",
     "featured": false
@@ -237,8 +322,17 @@
     },
     "benefits": {
       "cashback": {
-         "maxRate": 8,
-         "categories": [{ "name": "Dining", "rate": 8 }, { "name": "Groceries", "rate": 5 }]
+        "maxRate": 8,
+        "categories": [
+          {
+            "name": "Dining",
+            "rate": 8
+          },
+          {
+            "name": "Groceries",
+            "rate": 5
+          }
+        ]
       }
     },
     "highlights": [
@@ -247,8 +341,15 @@
       "Unlimited cashback",
       "Priority banking perks"
     ],
-    "pros": ["Industry-leading dining cashback", "No cashback cap", "Strong brand"],
-    "cons": ["Higher income requirement", "Competitive spend for waiver"],
+    "pros": [
+      "Industry-leading dining cashback",
+      "No cashback cap",
+      "Strong brand"
+    ],
+    "cons": [
+      "Higher income requirement",
+      "Competitive spend for waiver"
+    ],
     "rating": 4.6,
     "applyUrl": "https://hsbc.com.my",
     "featured": true

@@ -8,7 +8,7 @@ export default function Navbar() {
 
     const navLinks = [
         { href: '/', label: 'Home' },
-        { href: '/cards', label: 'Credit Cards' },
+        { href: '/cards', label: 'All Cards' },
         { href: '/compare', label: 'Compare' },
     ];
 
