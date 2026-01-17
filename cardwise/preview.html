@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardWise - Compare Malaysia's Best Credit Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #008248;
+            --primary-hover: #006837;
+            --primary-light: #E6F4ED;
+            --text-dark: #2D3436;
+            --text-muted: #636E72;
+            --text-light: #B2BEC3;
+            --background: #FFFFFF;
+            --background-soft: #F7F7F7;
+            --border: #E0E0E0;
+            --radius-lg: 12px;
+            --star-yellow: #FFB800;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: var(--background-soft);
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero-ringgit {
+            position: relative;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f0ff 50%, #d0e8ff 100%);
+            padding: 80px 0 100px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: white;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--background-soft);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+        }
+
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 64px 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .category-tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 28px 20px;
+            background: var(--background-soft);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .category-tile:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 130, 72, 0.15);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .category-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .category-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Promotions Section */
+        .promotions-section {
+            padding: 64px 0;
+            background: var(--background-soft);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .promotions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .promo-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .promo-card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .promo-card-image {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 20px;
+            font-size: 48px;
+        }
+
+        .promo-card-content {
+            padding: 20px;
+        }
+
+        .promo-card-bank {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .promo-card-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .promo-card-highlight {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 64px 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--background-soft);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .star {
+            color: var(--star-yellow);
+            font-size: 18px;
+        }
+
+        .testimonial-quote {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #10b981);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .testimonial-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .testimonial-location {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 64px 0;
+            background: var(--background-soft);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .blog-card-category {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 100px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .blog-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .blog-card-date {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer-new {
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 64px 0 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .footer-country {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .footer-links a {
+            display: block;
+            font-size: 14px;
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer-disclaimer {
+            font-size: 12px;
+            color: #475569;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="nav-logo">CardWise</a>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Credit Cards</a>
+                <a href="#" class="nav-link">Compare</a>
+                <a href="#" class="nav-link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-ringgit">
+        <div class="hero-content container">
+            <div class="hero-badge">🇲🇾 Malaysia's Credit Card Comparison Platform</div>
+            <h1 class="hero-title">
+                Search. Compare. <span class="text-gradient">Apply.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Find the perfect credit card for your lifestyle. Compare rewards, cashback, and benefits from Malaysia's top banks.
+            </p>
+            
+            <div class="hero-cta-group">
+                <a href="#categories" class="btn btn-primary">Compare Credit Cards</a>
+                <a href="#featured" class="btn btn-secondary">Best Cashback Cards</a>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <span class="hero-stat-number">50+</span>
+                    <span class="hero-stat-label">Credit Cards</span>
+                </div>
+                <div>
+                    <span class="hero-stat-number">10+</span>
+                    <span class="hero-stat-label">Banks</span>
+                </div>
+                <div>
+                    <span class="hero-stat-number">100%</span>
+                    <span class="hero-stat-label">Free to Use</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Tiles -->
+    <section id="categories" class="category-section">
+        <div class="container">
+            <h2 class="section-title">Find Your Perfect Card</h2>
+            <p class="section-subtitle">Choose a category to explore credit cards that match your needs</p>
+            
+            <div class="category-grid">
+                <div class="category-tile" onclick="alert('Navigating to Cashback cards...')">
+                    <span class="category-icon">💰</span>
+                    <h3 class="category-name">Best Cashback</h3>
+                    <p class="category-desc">Earn money back on every purchase</p>
+                </div>
+                <div class="category-tile" onclick="alert('Navigating to Travel & Miles cards...')">
+                    <span class="category-icon">✈️</span>
+                    <h3 class="category-name">Travel & Miles</h3>
+                    <p class="category-desc">Collect air miles & travel perks</p>
+                </div>
+                <div class="category-tile" onclick="alert('Navigating to Dining Rewards cards...')">
+                    <span class="category-icon">🍽️</span>
+                    <h3 class="category-name">Dining Rewards</h3>
+                    <p class="category-desc">Discounts at restaurants</p>
+                </div>
+                <div class="category-tile" onclick="alert('Navigating to Petrol cards...')">
+                    <span class="category-icon">⛽</span>
+                    <h3 class="category-name">Petrol Cards</h3>
+                    <p class="category-desc">Save on fuel purchases</p>
+                </div>
+                <div class="category-tile" onclick="alert('Navigating to Shopping cards...')">
+                    <span class="category-icon">🛒</span>
+                    <h3 class="category-name">Shopping</h3>
+                    <p class="category-desc">Extra rewards on retail</p>
+                </div>
+                <div class="category-tile" onclick="alert('Navigating to No Annual Fee cards...')">
+                    <span class="category-icon">🎁</span>
+                    <h3 class="category-name">No Annual Fee</h3>
+                    <p class="category-desc">Free cards forever</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Promotions -->
+    <section id="featured" class="promotions-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 8px;">
+                        🔥 Featured Credit Cards
+                    </h2>
+                    <p class="section-subtitle" style="text-align: left;">
+                        Apply now and get exclusive gifts from CardWise
+                    </p>
+                </div>
+                <a href="#" class="btn btn-secondary">View All Cards →</a>
+            </div>
+
+            <div class="promotions-grid">
+                <div class="promo-card" onclick="alert('Opening Maybank 2 Card details...')">
+                    <div class="promo-card-badge">Exclusive Gift</div>
+                    <div class="promo-card-image">💳</div>
+                    <div class="promo-card-content">
+                        <span class="promo-card-bank">Maybank</span>
+                        <h3 class="promo-card-name">Maybank 2 Gold Card</h3>
+                        <div class="promo-card-highlight">5% cashback on petrol & groceries</div>
+                        <button class="btn btn-primary btn-sm" style="width: 100%;">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="promo-card" onclick="alert('Opening CIMB Platinum card details...')">
+                    <div class="promo-card-badge">Exclusive Gift</div>
+                    <div class="promo-card-image">💳</div>
+                    <div class="promo-card-content">
+                        <span class="promo-card-bank">CIMB</span>
+                        <h3 class="promo-card-name">CIMB Platinum Card</h3>
+                        <div class="promo-card-highlight">10x rewards points on weekend dining</div>
+                        <button class="btn btn-primary btn-sm" style="width: 100%;">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="promo-card" onclick="alert('Opening UOB One Card details...')">
+                    <div class="promo-card-badge">Exclusive Gift</div>
+                    <div class="promo-card-image">💳</div>
+                    <div class="promo-card-content">
+                        <span class="promo-card-bank">UOB</span>
+                        <h3 class="promo-card-name">UOB One Card</h3>
+                        <div class="promo-card-highlight">Up to 5% cashback on top spend categories</div>
+                        <button class="btn btn-primary btn-sm" style="width: 100%;">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="promo-card" onclick="alert('Opening HSBC Advance card details...')">
+                    <div class="promo-card-badge">Exclusive Gift</div>
+                    <div class="promo-card-image">💳</div>
+                    <div class="promo-card-content">
+                        <span class="promo-card-bank">HSBC</span>
+                        <h3 class="promo-card-name">HSBC Advance Card</h3>
+                        <div class="promo-card-highlight">Free airport lounge access worldwide</div>
+                        <button class="btn btn-primary btn-sm" style="width: 100%;">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Hear From Our Users</h2>
+            <p class="section-subtitle">Join thousands of Malaysians who found their perfect credit card</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">"Found the perfect cashback card through CardWise. The comparison tool made it so easy to see all the benefits side by side!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AR</div>
+                        <div>
+                            <div class="testimonial-name">Ahmad R.</div>
+                            <div class="testimonial-location">Kuala Lumpur</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">"I was able to compare travel cards and found one that gives me free airport lounge access. Saved me hours of research!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SL</div>
+                        <div>
+                            <div class="testimonial-name">Sarah L.</div>
+                            <div class="testimonial-location">Penang</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-quote">"The detailed reviews helped me understand the fine print. Now I earn 5% cashback on all my petrol purchases."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">KT</div>
+                        <div>
+                            <div class="testimonial-name">Kevin T.</div>
+                            <div class="testimonial-location">Johor Bahru</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Preview -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 8px;">
+                        📰 Latest from CardWise
+                    </h2>
+                    <p class="section-subtitle" style="text-align: left;">
+                        Stay updated with credit card news, tips, and guides
+                    </p>
+                </div>
+                <a href="#" class="btn btn-secondary">View All Articles →</a>
+            </div>
+
+            <div class="blog-grid">
+                <div class="blog-card" onclick="alert('Opening article...')">
+                    <div class="blog-card-category">Card Guides</div>
+                    <h3 class="blog-card-title">Top 5 Cashback Credit Cards in Malaysia for 2026</h3>
+                    <div class="blog-card-date">Jan 15, 2026</div>
+                </div>
+
+                <div class="blog-card" onclick="alert('Opening article...')">
+                    <div class="blog-card-category">Tips & Tricks</div>
+                    <h3 class="blog-card-title">How to Maximize Your Credit Card Rewards</h3>
+                    <div class="blog-card-date">Jan 12, 2026</div>
+                </div>
+
+                <div class="blog-card" onclick="alert('Opening article...')">
+                    <div class="blog-card-category">Beginners Guide</div>
+                    <h3 class="blog-card-title">Understanding Annual Fees: Is It Worth Paying?</h3>
+                    <div class="blog-card-date">Jan 10, 2026</div>
+                </div>
+
+                <div class="blog-card" onclick="alert('Opening article...')">
+                    <div class="blog-card-category">Bank News</div>
+                    <h3 class="blog-card-title">New: Maybank Updates Credit Card Terms & Conditions</h3>
+                    <div class="blog-card-date">Jan 8, 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-new">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">CardWise</h3>
+                    <p class="footer-tagline">
+                        Compare credit cards from Malaysia's top banks. Find the best rewards, cashback, and benefits.
+                    </p>
+                    <div class="footer-country">
+                        <span>🇲🇾</span> Malaysia
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Credit Cards</h4>
+                    <a href="#">Best Cashback</a>
+                    <a href="#">Travel & Miles</a>
+                    <a href="#">Dining Rewards</a>
+                    <a href="#">Petrol Cards</a>
+                    <a href="#">No Annual Fee</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Tools</h4>
+                    <a href="#">Compare Cards</a>
+                    <a href="#">Cashback Calculator</a>
+                    <a href="#">Miles Calculator</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#">Blog & Guides</a>
+                    <a href="#">About CardWise</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 CardWise. All rights reserved.</p>
+                <p class="footer-disclaimer">
+                    Information provided is for reference only. Please verify details with the respective banks before applying.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add click feedback
+        console.log('CardWise Homepage Loaded! Click on any category or card to interact.');
+    </script>
+</body>
+</html>
