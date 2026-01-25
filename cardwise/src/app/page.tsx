@@ -1,6 +1,81 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const slides = [
+  {
+    text: "Did you know, the average Malaysian misses out on over RM1,500+ on credit card benefits every year?",
+    highlight: "RM1,500+",
+  },
+  {
+    text: "Stop leaving money on the table. Maximise your daily spending with the perfect cashback card.",
+    highlight: "perfect cashback card",
+  },
+  {
+    text: "Travel smarter. Earn miles and free airport lounge access for your next holiday.",
+    highlight: "Travel smarter",
+  },
+];
+
+function HeroSlider() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000); // 5 seconds transition
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div style={{ maxWidth: '900px', textAlign: 'center', transition: 'opacity 0.5s ease-in-out' }}>
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          style={{
+            display: currentSlide === index ? 'block' : 'none',
+            animation: 'fadeIn 0.8s ease-out'
+          }}
+        >
+          <h1
+            style={{
+              fontSize: '48px',
+              fontWeight: 800,
+              lineHeight: 1.2,
+              color: '#1e293b',
+              marginBottom: '24px'
+            }}
+          >
+            {slide.text.split(slide.highlight)[0]}
+            <span style={{ color: '#008248' }}>{slide.highlight}</span>
+            {slide.text.split(slide.highlight)[1]}
+          </h1>
+        </div>
+      ))}
+
+      {/* Dots Indicator */}
+      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '32px' }}>
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              border: 'none',
+              cursor: 'pointer',
+              backgroundColor: currentSlide === idx ? '#008248' : '#cbd5e1',
+              transition: 'all 0.3s'
+            }}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,31 +88,20 @@ export default function Home() {
 
   return (
     <>
-      {/* Section 1: The Fact */}
+      {/* Section 1: Hero Slider */}
       <section
         style={{
-          minHeight: '100vh',
+          minHeight: '80vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           padding: '48px 24px',
           background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div style={{ maxWidth: '800px', textAlign: 'center' }}>
-          <h1
-            style={{
-              fontSize: '36px',
-              fontWeight: 800,
-              lineHeight: 1.3,
-              color: '#1e293b',
-            }}
-          >
-            Did you know, the average Malaysian misses out on over{' '}
-            <span style={{ color: '#008248' }}>RM1,500+</span> on credit card
-            benefits every year?
-          </h1>
-        </div>
+        <HeroSlider />
       </section>
 
       {/* Section 2: Pain Points - Speech Bubbles */}
