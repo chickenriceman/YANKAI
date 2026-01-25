@@ -39,14 +39,46 @@ function CompareContent() {
     }
 
     const compareFields = [
-        { key: 'bank', label: 'Bank' },
-        { key: 'country', label: 'Country', format: (v: string) => v === 'MY' ? '🇲🇾 Malaysia' : '🇸🇬 Singapore' },
-        { key: 'type', label: 'Type', format: (v: string) => v === 'cashback' ? '💰 Cashback' : '✈️ Miles' },
-        { key: 'annualFee', label: 'Annual Fee' },
-        { key: 'minIncome', label: 'Min. Income' },
-        { key: 'cashbackRate', label: 'Cashback Rate', fallback: 'milesRate', fallbackLabel: 'Miles Rate' },
-        { key: 'signupBonus', label: 'Signup Bonus' },
-        { key: 'rating', label: 'Rating', format: (v: number) => `⭐ ${v}/5` },
+        {
+            key: 'bank',
+            label: 'Bank',
+            getValue: (c: CreditCard) => c.bank
+        },
+        {
+            key: 'country',
+            label: 'Country',
+            getValue: (c: CreditCard) => c.country === 'MY' ? '🇲🇾 Malaysia' : '🇸🇬 Singapore'
+        },
+        {
+            key: 'type',
+            label: 'Type',
+            getValue: (c: CreditCard) => c.type === 'cashback' ? '💰 Cashback' : '✈️ Miles'
+        },
+        {
+            key: 'annualFee',
+            label: 'Annual Fee',
+            getValue: (c: CreditCard) => `${c.fees.currency} ${c.fees.principal}`
+        },
+        {
+            key: 'minIncome',
+            label: 'Min. Income',
+            getValue: (c: CreditCard) => `${c.requirements.minIncome.currency} ${c.requirements.minIncome.amount.toLocaleString()}`
+        },
+        {
+            key: 'rate',
+            label: 'Earn Rate',
+            getValue: (c: CreditCard) => c.benefits.cashback ? `Up to ${c.benefits.cashback.maxRate}%` : (c.benefits.miles?.earnRate || '—')
+        },
+        {
+            key: 'signupBonus',
+            label: 'Signup Bonus',
+            getValue: (c: CreditCard) => c.promotion?.gift || '—'
+        },
+        {
+            key: 'rating',
+            label: 'Rating',
+            getValue: (c: CreditCard) => `⭐ ${c.rating}/5`
+        },
     ];
 
     return (
@@ -93,25 +125,11 @@ function CompareContent() {
                                 <td className="p-4 font-medium" style={{ color: 'var(--foreground-muted)' }}>
                                     {field.label}
                                 </td>
-                                {selectedCards.map(card => {
-                                    let value = (card as Record<string, unknown>)[field.key];
-                                    let label = field.label;
-
-                                    if (!value && field.fallback) {
-                                        value = (card as Record<string, unknown>)[field.fallback];
-                                        label = field.fallbackLabel || label;
-                                    }
-
-                                    const displayValue = field.format
-                                        ? field.format(value as never)
-                                        : (value || '—');
-
-                                    return (
-                                        <td key={card.id} className="p-4 text-center">
-                                            {displayValue}
-                                        </td>
-                                    );
-                                })}
+                                {selectedCards.map(card => (
+                                    <td key={card.id} className="p-4 text-center">
+                                        {field.getValue(card)}
+                                    </td>
+                                ))}
                             </tr>
                         ))}
 

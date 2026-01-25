@@ -48,21 +48,24 @@ export default function CardItem({ card, onCompare, isComparing }: CardItemProps
                 <div className="card-row-stats">
                     <div className="card-stat">
                         <span className="card-stat-label">Annual Fee</span>
-                        <span className="card-stat-value">{card.annualFee.split(' (')[0]}</span>
+                        <span className="card-stat-value">
+                            {card.fees.currency} {card.fees.principal}
+                            {card.fees.waivedFirstYear && <span style={{ fontSize: '0.8em', color: 'var(--success)', display: 'block' }}>First year free</span>}
+                        </span>
                     </div>
                     <div className="card-stat">
                         <span className="card-stat-label">
                             {card.type === 'cashback' ? 'Cashback Rate' : 'Miles Rate'}
                         </span>
                         <span className="card-stat-value" style={{ color: 'var(--primary)' }}>
-                            {card.cashbackRate || card.milesRate}
+                            {card.benefits.cashback ? `Up to ${card.benefits.cashback.maxRate}%` : card.benefits.miles?.earnRate}
                         </span>
                     </div>
-                    {card.signupBonus && (
+                    {card.promotion && (
                         <div className="card-stat">
                             <span className="card-stat-label">Signup Bonus</span>
                             <span className="card-stat-value" style={{ color: 'var(--success)' }}>
-                                {card.signupBonus}
+                                {card.promotion.gift.split(' (')[0]}
                             </span>
                         </div>
                     )}

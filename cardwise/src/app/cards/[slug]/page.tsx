@@ -20,9 +20,10 @@ export async function generateMetadata({ params }: PageProps) {
     const card = cards.find(c => c.id === slug);
     if (!card) return { title: 'Card Not Found' };
 
+    const rate = card.benefits.cashback ? `Up to ${card.benefits.cashback.maxRate}% Cashback` : card.benefits.miles?.earnRate;
     return {
         title: `${card.name} Review | CardWise`,
-        description: `${card.name} from ${card.bank}. ${card.cashbackRate || card.milesRate}. Annual fee: ${card.annualFee}`,
+        description: `${card.name} from ${card.bank}. ${rate}. Annual fee: ${card.fees.currency} ${card.fees.principal}`,
     };
 }
 
@@ -68,7 +69,7 @@ export default async function CardDetailPage({ params }: PageProps) {
                         <h1 className="text-3xl font-bold mb-4">{card.name}</h1>
                         <div className="flex items-center gap-4">
                             <span className="text-2xl font-bold">
-                                {card.cashbackRate || card.milesRate}
+                                {card.benefits.cashback ? `Up to ${card.benefits.cashback.maxRate}%` : card.benefits.miles?.earnRate}
                             </span>
                             <span className="px-3 py-1 bg-white/20 rounded-full text-sm">
                                 {card.type === 'cashback' ? '💰 Cashback' : '✈️ Miles'}
@@ -123,7 +124,7 @@ export default async function CardDetailPage({ params }: PageProps) {
                                         <p className="text-sm" style={{ color: 'var(--foreground-muted)' }}>{similar.bank}</p>
                                         <p className="font-semibold">{similar.name}</p>
                                         <p className="text-sm" style={{ color: 'var(--primary)' }}>
-                                            {similar.cashbackRate || similar.milesRate}
+                                            {similar.benefits.cashback ? `Up to ${similar.benefits.cashback.maxRate}%` : similar.benefits.miles?.earnRate}
                                         </p>
                                     </Link>
                                 ))}
@@ -140,11 +141,17 @@ export default async function CardDetailPage({ params }: PageProps) {
                         <div className="space-y-4 mb-6">
                             <div className="flex justify-between py-2 border-b" style={{ borderColor: 'var(--border)' }}>
                                 <span style={{ color: 'var(--foreground-muted)' }}>Annual Fee</span>
-                                <span className="font-medium text-right">{card.annualFee}</span>
+                                <div className="text-right">
+                                    <span className="font-medium block">{card.fees.currency} {card.fees.principal}</span>
+                                    {card.fees.waivedFirstYear && <span className="text-xs text-green-600">First year free</span>}
+                                </div>
                             </div>
                             <div className="flex justify-between py-2 border-b" style={{ borderColor: 'var(--border)' }}>
                                 <span style={{ color: 'var(--foreground-muted)' }}>Min. Income</span>
-                                <span className="font-medium">{card.minIncome}</span>
+                                <div className="text-right">
+                                    <span className="font-medium block">{card.requirements.minIncome.currency} {card.requirements.minIncome.amount.toLocaleString()}</span>
+                                    <span className="text-xs text-gray-500">per {card.requirements.minIncome.period}</span>
+                                </div>
                             </div>
                             <div className="flex justify-between py-2 border-b" style={{ borderColor: 'var(--border)' }}>
                                 <span style={{ color: 'var(--foreground-muted)' }}>Rating</span>
@@ -152,13 +159,16 @@ export default async function CardDetailPage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        {card.signupBonus && (
+                        {card.promotion && (
                             <div className="p-4 rounded-lg mb-6" style={{ backgroundColor: 'var(--background-alt)' }}>
                                 <p className="text-sm font-medium" style={{ color: 'var(--foreground-muted)' }}>
-                                    Signup Bonus
+                                    {card.promotion.title}
                                 </p>
                                 <p className="text-lg font-bold" style={{ color: 'var(--success)' }}>
-                                    {card.signupBonus}
+                                    {card.promotion.gift}
+                                </p>
+                                <p className="text-xs mt-2 text-gray-500">
+                                    Valid until {card.promotion.endDate}
                                 </p>
                             </div>
                         )}
