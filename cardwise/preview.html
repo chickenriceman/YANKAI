@@ -274,7 +274,7 @@
         <div class="navbar-inner">
             <a href="#" class="nav-logo">CardWise</a>
             <div class="nav-links">
-                <a href="#" class="nav-link">Credit Cards</a>
+                <a href="cards.html" class="nav-link">Credit Cards</a>
                 <a href="#" class="nav-link">Compare</a>
             </div>
         </div>
@@ -390,11 +390,7 @@
 
                 // Redirect after 2 seconds
                 setTimeout(() => {
-                    // In a real app, this would redirect to cards page
-                    // window.location.href = '/cards?category=' + category;
-                    alert('Redirecting to ' + category + ' card recommendations...');
-                    document.getElementById('selectionEffect').classList.remove('active');
-                    button.classList.remove('selected');
+                    window.location.href = 'cards.html?category=' + category;
                 }, 2000);
             }, 300);
         }

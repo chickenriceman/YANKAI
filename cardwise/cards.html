@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Cards - CardWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 24px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #008248;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #1e293b;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #f0fdf4;
+            color: #008248;
+        }
+
+        /* Main content */
+        .main {
+            padding-top: 88px;
+            padding-bottom: 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        /* Page header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #64748b;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #008248 0%, #00a85a 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: capitalize;
+            margin-bottom: 16px;
+        }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .filter-tab:hover {
+            border-color: #008248;
+            color: #008248;
+        }
+
+        .filter-tab.active {
+            background: #008248;
+            border-color: #008248;
+            color: white;
+        }
+
+        /* Cards grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        /* Card item */
+        .card-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            padding: 24px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .card-bank {
+            font-size: 12px;
+            font-weight: 600;
+            color: #008248;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .card-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .card-type {
+            font-size: 13px;
+            color: #64748b;
+            text-transform: capitalize;
+        }
+
+        .card-body {
+            padding: 24px;
+            flex: 1;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 16px;
+        }
+
+        .rating-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .card-highlights {
+            margin-bottom: 16px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .highlight-icon {
+            color: #008248;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .card-cashback {
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .cashback-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .cashback-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #008248;
+        }
+
+        .cashback-suffix {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .card-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #008248;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #006b3b;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1e293b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            border-color: #008248;
+            color: #008248;
+        }
+
+        /* Featured badge */
+        .featured-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-header {
+            position: relative;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="preview.html" class="nav-logo">CardWise</a>
+            <div class="nav-links">
+                <a href="cards.html" class="nav-link active">Credit Cards</a>
+                <a href="#" class="nav-link">Compare</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main">
+        <div class="page-header">
+            <div class="category-badge" id="categoryBadge">All Cards</div>
+            <h1 class="page-title" id="pageTitle">Credit Cards</h1>
+            <p class="page-subtitle" id="pageSubtitle">Find the perfect card for your spending habits</p>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterCards('all')">All Cards</button>
+            <button class="filter-tab" onclick="filterCards('dining')">🍽️ Dining</button>
+            <button class="filter-tab" onclick="filterCards('shopping')">🛍️ Shopping</button>
+            <button class="filter-tab" onclick="filterCards('travel')">✈️ Travel</button>
+            <button class="filter-tab" onclick="filterCards('cashback')">💰 Cashback</button>
+            <button class="filter-tab" onclick="filterCards('miles')">🎯 Miles</button>
+        </div>
+
+        <!-- Cards grid -->
+        <div class="cards-grid" id="cardsGrid">
+            <!-- Cards will be loaded here -->
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-state-icon">🔍</div>
+            <h3 class="empty-state-title">No cards found</h3>
+            <p>Try adjusting your filters to find more cards.</p>
+        </div>
+    </main>
+
+    <script>
+        // Card data from cards.json (embedded for static HTML)
+        const cardsData = [
+            {
+                "id": "hsbc-live-plus",
+                "name": "HSBC Live+ Credit Card",
+                "bank": "HSBC",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["dining", "shopping"],
+                "maxCashback": 8,
+                "highlights": [
+                    "Up to 8% cashback on dining, shopping & entertainment",
+                    "Guaranteed RM200 TNG Credit Gift",
+                    "First year fee waived"
+                ],
+                "rating": 4.8,
+                "applyUrl": "https://hsbc.com.my",
+                "featured": true
+            },
+            {
+                "id": "maybank-world-mastercard",
+                "name": "Maybank World Mastercard",
+                "bank": "Maybank",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["travel", "shopping"],
+                "maxCashback": 5,
+                "highlights": [
+                    "5% cashback on weekends",
+                    "Free airport lounge access",
+                    "Complimentary travel insurance",
+                    "0% installment plans"
+                ],
+                "rating": 4.5,
+                "applyUrl": "https://maybank.com.my",
+                "featured": true
+            },
+            {
+                "id": "cimb-preferred-visa-infinite",
+                "name": "CIMB Preferred Visa Infinite",
+                "bank": "CIMB",
+                "country": "MY",
+                "type": "miles",
+                "categories": ["travel"],
+                "maxCashback": null,
+                "milesRate": "1.5 miles per RM1",
+                "highlights": [
+                    "Priority Pass lounge access",
+                    "3x points on overseas spend",
+                    "Golf privileges",
+                    "Luxury hotel benefits"
+                ],
+                "rating": 4.3,
+                "applyUrl": "https://cimb.com.my",
+                "featured": true
+            },
+            {
+                "id": "public-bank-quantum",
+                "name": "Public Bank Quantum Visa",
+                "bank": "Public Bank",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["shopping"],
+                "maxCashback": 5,
+                "highlights": [
+                    "5% cashback on selected categories",
+                    "Easy annual fee waiver",
+                    "Low income requirement",
+                    "Mobile payment support"
+                ],
+                "rating": 4.2,
+                "applyUrl": "https://publicbank.com.my",
+                "featured": false
+            },
+            {
+                "id": "hsbc-visa-signature",
+                "name": "HSBC Visa Signature",
+                "bank": "HSBC",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["dining"],
+                "maxCashback": 8,
+                "highlights": [
+                    "8% cashback on dining",
+                    "5% on groceries & petrol",
+                    "Unlimited cashback",
+                    "Priority banking perks"
+                ],
+                "rating": 4.6,
+                "applyUrl": "https://hsbc.com.my",
+                "featured": true
+            },
+            {
+                "id": "ambank-platinum",
+                "name": "AmBank Platinum Visa",
+                "bank": "AmBank",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["shopping"],
+                "maxCashback": 4,
+                "highlights": [
+                    "4% cashback on petrol",
+                    "3% on groceries",
+                    "Low annual fee",
+                    "Balance transfer offers"
+                ],
+                "rating": 3.9,
+                "applyUrl": "https://ambank.com.my",
+                "featured": false
+            },
+            {
+                "id": "dbs-altitude-visa",
+                "name": "DBS Altitude Visa Signature",
+                "bank": "DBS",
+                "country": "SG",
+                "type": "miles",
+                "categories": ["travel"],
+                "maxCashback": null,
+                "milesRate": "Up to 3 miles per S$1",
+                "highlights": [
+                    "3 miles per S$1 online",
+                    "2 miles per S$1 overseas",
+                    "Transfer to 10+ airlines",
+                    "No mileage expiry"
+                ],
+                "rating": 4.7,
+                "applyUrl": "https://dbs.com.sg",
+                "featured": true
+            },
+            {
+                "id": "uob-lady-solitaire",
+                "name": "UOB Lady's Solitaire",
+                "bank": "UOB",
+                "country": "SG",
+                "type": "cashback",
+                "categories": ["shopping"],
+                "maxCashback": 6,
+                "highlights": [
+                    "6% cashback on beauty & wellness",
+                    "3x points on fashion",
+                    "Lifestyle privileges",
+                    "Exclusive events access"
+                ],
+                "rating": 4.4,
+                "applyUrl": "https://uob.com.sg",
+                "featured": false
+            },
+            {
+                "id": "ocbc-365",
+                "name": "OCBC 365 Credit Card",
+                "bank": "OCBC",
+                "country": "SG",
+                "type": "cashback",
+                "categories": ["dining"],
+                "maxCashback": 6,
+                "highlights": [
+                    "6% on dining",
+                    "3% on groceries & online",
+                    "Everyday spending rewards",
+                    "No minimum spend"
+                ],
+                "rating": 4.5,
+                "applyUrl": "https://ocbc.com",
+                "featured": true
+            },
+            {
+                "id": "citi-premiermiles",
+                "name": "Citi PremierMiles Visa",
+                "bank": "Citibank",
+                "country": "SG",
+                "type": "miles",
+                "categories": ["travel"],
+                "maxCashback": null,
+                "milesRate": "Up to 2 miles per S$1",
+                "highlights": [
+                    "Transfer to 15+ airlines",
+                    "No blackout dates",
+                    "Free travel insurance",
+                    "Global acceptance"
+                ],
+                "rating": 4.3,
+                "applyUrl": "https://citibank.com.sg",
+                "featured": false
+            },
+            {
+                "id": "sc-unlimited-cashback",
+                "name": "Standard Chartered Unlimited Cashback",
+                "bank": "Standard Chartered",
+                "country": "SG",
+                "type": "cashback",
+                "categories": ["shopping", "dining"],
+                "maxCashback": 1.5,
+                "highlights": [
+                    "1.5% on everything",
+                    "No spend category restriction",
+                    "No cashback cap",
+                    "Simple structure"
+                ],
+                "rating": 4.1,
+                "applyUrl": "https://sc.com/sg",
+                "featured": false
+            },
+            {
+                "id": "rhb-dual-card",
+                "name": "RHB Dual Credit Card",
+                "bank": "RHB",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["shopping"],
+                "maxCashback": 3,
+                "highlights": [
+                    "2 cards in 1 (Visa + Mastercard)",
+                    "3% petrol cashback",
+                    "Mobile contactless",
+                    "Budget-friendly"
+                ],
+                "rating": 3.8,
+                "applyUrl": "https://rhbgroup.com",
+                "featured": false
+            },
+            {
+                "id": "hong-leong-wise-gold",
+                "name": "Hong Leong Wise Gold Card",
+                "bank": "Hong Leong",
+                "country": "MY",
+                "type": "cashback",
+                "categories": ["shopping"],
+                "maxCashback": 5,
+                "highlights": [
+                    "Free for life",
+                    "5% on groceries",
+                    "0% easy payment plan",
+                    "QuickPay ready"
+                ],
+                "rating": 4.0,
+                "applyUrl": "https://hlb.com.my",
+                "featured": true
+            }
+        ];
+
+        // Get URL parameters
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Generate star rating
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalf = rating % 1 >= 0.5;
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) stars += '★';
+            if (hasHalf) stars += '☆';
+            return stars;
+        }
+
+        // Render a single card
+        function renderCard(card) {
+            return `
+                <div class="card-item">
+                    <div class="card-header">
+                        ${card.featured ? '<span class="featured-badge">Featured</span>' : ''}
+                        <div class="card-bank">${card.bank}</div>
+                        <div class="card-name">${card.name}</div>
+                        <div class="card-type">${card.type} Card • ${card.country}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-rating">
+                            <span class="stars">${generateStars(card.rating)}</span>
+                            <span class="rating-value">${card.rating}</span>
+                        </div>
+                        ${card.maxCashback ? `
+                            <div class="card-cashback">
+                                <div class="cashback-label">Up to</div>
+                                <div class="cashback-value">${card.maxCashback}%<span class="cashback-suffix"> cashback</span></div>
+                            </div>
+                        ` : card.milesRate ? `
+                            <div class="card-cashback">
+                                <div class="cashback-label">Earn Rate</div>
+                                <div class="cashback-value" style="font-size: 20px;">${card.milesRate}</div>
+                            </div>
+                        ` : ''}
+                        <div class="card-highlights">
+                            ${card.highlights.slice(0, 3).map(h => `
+                                <div class="highlight-item">
+                                    <span class="highlight-icon">✓</span>
+                                    <span>${h}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="${card.applyUrl}" target="_blank" class="btn btn-primary">Apply Now</a>
+                        <button class="btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filter and render cards
+        function filterCards(category) {
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update URL without reload
+            const url = new URL(window.location);
+            if (category === 'all') {
+                url.searchParams.delete('category');
+            } else {
+                url.searchParams.set('category', category);
+            }
+            window.history.pushState({}, '', url);
+
+            // Render filtered cards
+            renderCards(category);
+        }
+
+        // Render cards based on filter
+        function renderCards(category = 'all') {
+            const grid = document.getElementById('cardsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const categoryBadge = document.getElementById('categoryBadge');
+            const pageTitle = document.getElementById('pageTitle');
+            const pageSubtitle = document.getElementById('pageSubtitle');
+
+            let filteredCards = cardsData;
+
+            const categoryInfo = {
+                'all': { badge: 'All Cards', title: 'Credit Cards', subtitle: 'Find the perfect card for your spending habits' },
+                'dining': { badge: '🍽️ Dining', title: 'Best Dining Cards', subtitle: 'Maximize rewards when you eat out' },
+                'shopping': { badge: '🛍️ Shopping', title: 'Best Shopping Cards', subtitle: 'Get more value from every purchase' },
+                'travel': { badge: '✈️ Travel', title: 'Best Travel Cards', subtitle: 'Perfect companions for your adventures' },
+                'cashback': { badge: '💰 Cashback', title: 'Best Cashback Cards', subtitle: 'Get money back on your spending' },
+                'miles': { badge: '🎯 Miles', title: 'Best Miles Cards', subtitle: 'Earn miles for your next trip' }
+            };
+
+            if (category !== 'all') {
+                if (category === 'cashback' || category === 'miles') {
+                    filteredCards = cardsData.filter(card => card.type === category);
+                } else {
+                    filteredCards = cardsData.filter(card => card.categories.includes(category));
+                }
+            }
+
+            // Sort by featured first, then by rating
+            filteredCards.sort((a, b) => {
+                if (a.featured !== b.featured) return b.featured - a.featured;
+                return b.rating - a.rating;
+            });
+
+            // Update header
+            const info = categoryInfo[category] || categoryInfo['all'];
+            categoryBadge.textContent = info.badge;
+            pageTitle.textContent = info.title;
+            pageSubtitle.textContent = info.subtitle;
+
+            // Render cards or empty state
+            if (filteredCards.length > 0) {
+                grid.innerHTML = filteredCards.map(renderCard).join('');
+                grid.style.display = 'grid';
+                emptyState.style.display = 'none';
+            } else {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                const tabCategory = tab.textContent.toLowerCase().includes('all') ? 'all' :
+                    tab.textContent.includes('Dining') ? 'dining' :
+                        tab.textContent.includes('Shopping') ? 'shopping' :
+                            tab.textContent.includes('Travel') ? 'travel' :
+                                tab.textContent.includes('Cashback') ? 'cashback' :
+                                    tab.textContent.includes('Miles') ? 'miles' : 'all';
+
+                tab.classList.toggle('active', tabCategory === category);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const category = getUrlParam('category') || 'all';
+            renderCards(category);
+        });
+    </script>
+</body>
+
+</html>
