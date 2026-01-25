@@ -32,7 +32,7 @@ export default function FeaturedPromotions({ cards }: FeaturedPromotionsProps) {
                             <div className="promo-card-badge">Exclusive Gift</div>
                             <div className="promo-card-image">
                                 <Image
-                                    src={card.imageUrl}
+                                    src={card.image}
                                     alt={card.name}
                                     width={280}
                                     height={175}
@@ -43,7 +43,7 @@ export default function FeaturedPromotions({ cards }: FeaturedPromotionsProps) {
                                 <span className="promo-card-bank">{card.bank}</span>
                                 <h3 className="promo-card-name">{card.name}</h3>
                                 <div className="promo-card-highlight">
-                                    {card.signupBonus || card.rewards}
+                                    {card.promotion?.gift || card.highlights[0]}
                                 </div>
                                 <Link href={`/cards/${card.id}`} className="btn btn-primary btn-sm promo-card-btn">
                                     Learn More

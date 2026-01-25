@@ -81,37 +81,6 @@
     "featured": true
   },
   {
-    "id": "cimb-travel-world-elite",
-    "name": "CIMB Travel World Elite",
-    "bank": "CIMB",
-    "country": "MY",
-    "type": "miles",
-    "image": "/cards/cimb-travel-world-elite.png",
-    "annualFee": "RM 1,215.09 (waived with RM 240k spend)",
-    "minIncome": "RM 250,000",
-    "signupBonus": "Complimentary 4D3N stay at Anantara",
-    "cashbackRate": null,
-    "milesRate": "1 Mile / RM 1.00",
-    "highlights": [
-      "10x Bonus Points on overseas & airline spend",
-      "12x Lounge Access per year (Global)",
-      "Complimentary Marriott Club membership",
-      "No Foreign Transaction Fees"
-    ],
-    "pros": [
-      "Excellent overseas earn rate",
-      "Comprehensive travel insurance",
-      "Great airport lounge perks"
-    ],
-    "cons": [
-      "High income requirement",
-      "High annual fee"
-    ],
-    "rating": 4.8,
-    "applyUrl": "https://www.cimb.com.my/en/personal/day-to-day-banking/cards/credit-card/cimb-travel-world-elite-credit-card.html",
-    "featured": true
-  },
-  {
     "id": "maybank-world-mastercard",
     "name": "Maybank World Mastercard",
     "bank": "Maybank",
